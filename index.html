@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cameron Farrell | Engineering Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Portfolio of Cameron Farrell, Mechanical Engineering student specializing in Mechatronics."
+  />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.08);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1e293b;
+      --radius-lg: 1.25rem;
+      --radius-md: 0.75rem;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 3rem;
+    }
+
+    /* Top navigation */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 0;
+      padding: 0.85rem 1rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      backdrop-filter: blur(26px);
+      z-index: 20;
+    }
+
+    .nav-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-monogram {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #38bdf8, #0369a1 55%, #0f172a);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 650;
+      color: #e5f4ff;
+      box-shadow: 0 10px 28px rgba(56, 189, 248, 0.4);
+    }
+
+    .nav-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links a {
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: 0.18s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.4);
+      background-color: rgba(15, 23, 42, 0.8);
+    }
+
+    .nav-cta {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      color: var(--accent);
+      background: radial-gradient(circle at top left, #0ea5e9 0, #0b1120 40%, #020617 100%);
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+    }
+
+    .nav-cta:hover {
+      background: radial-gradient(circle at top, #22d3ee 0, #0b1120 50%);
+      border-color: #38bdf8;
+      color: #e0f9ff;
+    }
+
+    /* Hero section */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
+      gap: 2.5rem;
+      align-items: center;
+      padding: 2.2rem 0 2.8rem;
+    }
+
+    .hero-main-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.7rem);
+      font-weight: 650;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 30rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--muted);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), rgba(15, 23, 42, 0.9));
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #38bdf8 0, #0ea5e9 30%, #0b1120 90%);
+      color: #f9fafb;
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 24px 40px rgba(8, 47, 73, 0.9);
+    }
+
+    .btn-primary:hover {
+      background: radial-gradient(circle at top, #22d3ee 0, #0284c7 45%, #0f172a 95%);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-note strong {
+      color: var(--text);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-panel {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, rgba(15, 118, 110, 0.4), #020617 55%, #000 100%);
+      padding: 1.2rem;
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .hero-panel-title {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .hero-panel-badge {
+      font-size: 0.74rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 212, 191, 0.6);
+      color: #a5f3fc;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      font-size: 0.82rem;
+    }
+
+    .hero-card {
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 0.7rem 0.75rem;
+    }
+
+    .hero-card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-card-main {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .hero-card-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .hero-fade-bar {
+      position: absolute;
+      inset: auto -40% -45%;
+      height: 55%;
+      background: radial-gradient(circle at bottom, rgba(56, 189, 248, 0.26), transparent 65%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Layout grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.5fr);
+      gap: 1.75rem;
+      align-items: flex-start;
+    }
+
+    /* About */
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .about-highlight {
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0.95));
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .about-highlight strong {
+      color: var(--text);
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+
+    .chip-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.9rem 0.95rem;
+    }
+
+    .chip-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.5rem;
+      color: var(--muted);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 0.28rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text);
+    }
+
+    /* Projects */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 550;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .card-body {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--text);
+    }
+
+    .card-links {
+      margin-top: 0.35rem;
+      font-size: 0.8rem;
+    }
+
+    .card-links a {
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+    }
+
+    .card-links a:hover {
+      border-bottom-color: rgba(56, 189, 248, 0.8);
+    }
+
+    /* Experience */
+    .timeline {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 1rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 0.75rem;
+      padding: 0.7rem 0.3rem;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.35);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-title {
+      font-size: 0.95rem;
+      font-weight: 550;
+    }
+
+    .timeline-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-body {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .timeline-tags {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Contact */
+    .contact-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0.98));
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 0.6rem;
+    }
+
+    .contact-pill {
+      font-size: 0.86rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-pill span {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 1.8rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .nav {
+        margin-bottom: 1.4rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        padding: 1.1rem 1rem 2.5rem;
+      }
+
+      .nav {
+        padding: 0.7rem 0.85rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .timeline-item {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <!-- NAVBAR -->
+      <header class="nav">
+        <div class="nav-left">
+          <div class="nav-monogram">CF</div>
+          <div class="nav-title">Cameron&nbsp;Farrell</div>
+        </div>
+        <nav class="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact" class="nav-cta">Contact</a>
+        </nav>
+      </header>
+
+      <!-- HERO -->
+      <main>
+        <section class="hero" id="top">
+          <div class="hero-main">
+            <div class="hero-main-eyebrow">Mechanical Engineering | Mechatronics</div>
+            <h1 class="hero-title">
+              Engineering student building <span>data-backed</span> hardware and software systems.
+            </h1>
+            <p class="hero-subtitle">
+              Fourth-year Mechanical Engineering student at the University of New Brunswick (Mechatronics option)
+              with experience in FSAE vehicle dynamics, numerical methods, and manufacturing processes.
+            </p>
+
+            <div class="hero-tags">
+              <div class="hero-tag">FSAE • Vehicle Dynamics</div>
+              <div class="hero-tag">MATLAB • Simulink • Python</div>
+              <div class="hero-tag">CAD • Manufacturing</div>
+            </div>
+
+            <div class="hero-cta-row">
+              <!-- TODO: link this to your resume PDF in the repo -->
+              <a class="btn btn-primary" href="#" target="_blank" rel="noreferrer">
+                View Resume (PDF)
+              </a>
+              <!-- TODO: update to your Notion or portfolio index -->
+              <a class="btn btn-ghost" href="#" target="_blank" rel="noreferrer">
+                Notion Portfolio
+              </a>
+            </div>
+            <div class="hero-note">
+              Currently interested in <strong>mechanical / mechatronics internships</strong> in automotive, robotics,
+              and advanced manufacturing.
+            </div>
+          </div>
+
+          <aside class="hero-right">
+            <div class="hero-panel">
+              <div class="hero-panel-header">
+                <div class="hero-panel-title">Snapshot</div>
+                <div class="hero-panel-badge">Available for Summer 2026</div>
+              </div>
+              <div class="hero-grid">
+                <div class="hero-card">
+                  <div class="hero-card-label">Focus Areas</div>
+                  <div class="hero-card-main">Vehicle Dynamics, Modeling, Manufacturing</div>
+                  <div class="hero-card-sub">
+                    Suspension & wheel-load modeling, forging/drawing labs, numerical methods.
+                  </div>
+                </div>
+                <div class="hero-card">
+                  <div class="hero-card-label">Tools</div>
+                  <div class="hero-card-main">MATLAB, Simulink, Python, CAD</div>
+                  <div class="hero-card-sub">
+                    SolidWorks / Inventor, Git, Lab equipment (load cells, dynamometers).
+                  </div>
+                </div>
+                <div class="hero-card">
+                  <div class="hero-card-label">Current Work</div>
+                  <div class="hero-card-main">UNB FSAE | Wheel-load & frequency analysis</div>
+                  <div class="hero-card-sub">
+                    Modeling weight transfer, ride/roll rates, and suspension parameters.
+                  </div>
+                </div>
+                <div class="hero-card">
+                  <div class="hero-card-label">Interests</div>
+                  <div class="hero-card-main">Motorsport • Cycling • Mechatronics</div>
+                  <div class="hero-card-sub">
+                    FSAE EV concepts, custom bike components, control systems.
+                  </div>
+                </div>
+              </div>
+              <div class="hero-fade-bar"></div>
+            </div>
+          </aside>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about">
+          <div class="section-label">About</div>
+          <div class="grid-2">
+            <div>
+              <h2 class="section-title">Turning analysis and prototyping into real hardware.</h2>
+              <p class="about-text">
+                I’m a Mechanical Engineering student specializing in Mechatronics at the University of New Brunswick.
+                My work focuses on using modeling and simulation to drive design decisions in vehicles and mechanical
+                systems, then validating those decisions through lab work and prototyping.
+                I’ve worked on FSAE suspension and wheel-load modeling, manufacturing labs (forging, rolling, drawing),
+                and numerical methods in Python and MATLAB.
+              </p>
+            </div>
+            <div class="about-highlight">
+              <strong>Quick highlights</strong>
+              <ul style="margin-top: 0.5rem; padding-left: 1.1rem;">
+                <li>FSAE: wheel-load, roll, and ride frequency analysis in MATLAB/Simulink.</li>
+                <li>Manufacturing: forging and drawing experiments with 6061-T6 aluminum and steel.</li>
+                <li>Numerical methods: iterative solvers, root finding, LU factorization in Python/MATLAB.</li>
+                <li>Cycling/mechanics: hands-on experience with bicycle assembly, maintenance, and component upgrades.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+          <div class="section-label">Skills</div>
+          <h2 class="section-title">Tools and capabilities</h2>
+
+          <div class="skills-grid">
+            <div class="chip-card">
+              <div class="chip-title">CAD & Design</div>
+              <div class="chip-row">
+                <span class="chip">SolidWorks</span>
+                <span class="chip">Autodesk Inventor</span>
+                <span class="chip">GD&amp;T</span>
+                <span class="chip">Basic FEA</span>
+              </div>
+            </div>
+            <div class="chip-card">
+              <div class="chip-title">Programming & Modeling</div>
+              <div class="chip-row">
+                <span class="chip">MATLAB</span>
+                <span class="chip">Simulink</span>
+                <span class="chip">Python</span>
+                <span class="chip">Numerical Methods</span>
+                <span class="chip">Data Analysis</span>
+              </div>
+            </div>
+            <div class="chip-card">
+              <div class="chip-title">Manufacturing & Testing</div>
+              <div class="chip-row">
+                <span class="chip">Machining (lathe, mill)</span>
+                <span class="chip">Forging & Drawing Labs</span>
+                <span class="chip">Measurement & Inspection</span>
+                <span class="chip">Lab Instrumentation</span>
+              </div>
+            </div>
+            <div class="chip-card">
+              <div class="chip-title">Systems & Workflow</div>
+              <div class="chip-row">
+                <span class="chip">Git / GitHub</span>
+                <span class="chip">LaTeX / MS Office</span>
+                <span class="chip">Technical Writing</span>
+                <span class="chip">Team Collaboration</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+          <div class="section-label">Projects</div>
+          <h2 class="section-title">Selected engineering work</h2>
+
+          <div class="cards">
+            <!-- Project 1 -->
+            <article class="card">
+              <div class="card-label">FSAE | Vehicle Dynamics</div>
+              <div class="card-title">Wheel-load, roll, and frequency analysis for FSAE car</div>
+              <div class="card-meta">MATLAB / Simulink • Suspension design</div>
+              <p class="card-body">
+                Developed dynamic models to evaluate wheel-load transfer under combined braking and cornering,
+                and to calculate ride and roll frequencies. Tuned suspension parameters to meet handling and compliance targets.
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Wheel-load transfer</span>
+                <span class="card-tag">Ride & roll rates</span>
+                <span class="card-tag">Parameter sweeps</span>
+              </div>
+              <div class="card-links">
+                <!-- TODO: link to GitHub repo if public -->
+                <a href="#" target="_blank" rel="noreferrer">View code / documentation</a>
+              </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="card">
+              <div class="card-label">Manufacturing | Lab Work</div>
+              <div class="card-title">Forging and drawing of aluminum and steel specimens</div>
+              <div class="card-meta">Lab analysis • Material behavior</div>
+              <p class="card-body">
+                Performed open-die forging and drawing experiments on 6061-T6 aluminum and cold-rolled steel.
+                Used load cell data and measured geometry to analyze flow stress, friction, power requirements,
+                and microstructural effects.
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Forging</span>
+                <span class="card-tag">Drawing</span>
+                <span class="card-tag">Friction / power</span>
+              </div>
+              <div class="card-links">
+                <!-- TODO: link to PDF report -->
+                <a href="#" target="_blank" rel="noreferrer">View lab report</a>
+              </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="card">
+              <div class="card-label">Numerical Methods</div>
+              <div class="card-title">Iterative solvers and root finding in Python</div>
+              <div class="card-meta">Python • Linear systems • Nonlinear equations</div>
+              <p class="card-body">
+                Implemented Jacobi and Gauss–Seidel solvers, LU factorization, and Newton-based root finding for
+                large systems. Compared convergence behavior, error norms, and numerical stability on 100x100+ systems.
+              </p>
+              <div class="card-tags">
+                <span class="card-tag">Jacobi / Gauss-Seidel</span>
+                <span class="card-tag">LU factorization</span>
+                <span class="card-tag">Error analysis</span>
+              </div>
+              <div class="card-links">
+                <!-- TODO: link to GitHub repo -->
+                <a href="#" target="_blank" rel="noreferrer">View Python code</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience">
+          <div class="section-label">Experience</div>
+          <h2 class="section-title">Industry and team experience</h2>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div>
+                <div class="timeline-title">Mechanical Engineering Co-op</div>
+                <div class="timeline-meta">BWS Manufacturing Ltd. • May–Sept 2024</div>
+                <div class="timeline-body">
+                  Supported trailer design and manufacturing using Autodesk Inventor and Vault,
+                  contributed to ISO 9001 audits, and helped refine production processes and documentation.
+                </div>
+              </div>
+              <div class="timeline-tags">
+                CAD • Manufacturing • Quality systems
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div>
+                <div class="timeline-title">Suspension / Dynamics Member</div>
+                <div class="timeline-meta">UNB Formula SAE • 2024–Present</div>
+                <div class="timeline-body">
+                  Built MATLAB/Simulink models for wheel-load transfer and ride/roll frequencies,
+                  using results to inform suspension geometry, spring selection, and handling targets.
+                </div>
+              </div>
+              <div class="timeline-tags">
+                Vehicle dynamics • MATLAB / Simulink
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div>
+                <div class="timeline-title">Sales & Service Representative</div>
+                <div class="timeline-meta">Savage’s Bicycle Centre • 2025</div>
+                <div class="timeline-body">
+                  Advised customers on bike fit and component choices, assembled and serviced bicycles,
+                  and gained hands-on experience with mechanical systems and troubleshooting.
+                </div>
+              </div>
+              <div class="timeline-tags">
+                Customer-facing • Mechanical assembly
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+          <div class="section-label">Contact</div>
+          <h2 class="section-title">Let’s talk</h2>
+
+          <div class="contact-card">
+            <p>
+              I’m actively looking for mechanical / mechatronics internships and co-op roles where I can contribute to
+              vehicle development, robotics, or advanced manufacturing while deepening my modeling and prototyping skills.
+            </p>
+            <div class="contact-row">
+              <!-- TODO: replace with your email -->
+              <div class="contact-pill">
+                <span>Email</span>
+                <a href="mailto:youremail@example.com">youremail@example.com</a>
+              </div>
+              <!-- TODO: replace with your GitHub -->
+              <div class="contact-pill">
+                <span>GitHub</span>
+                <a href="https://github.com/your-username" target="_blank" rel="noreferrer">
+                  github.com/your-username
+                </a>
+              </div>
+              <!-- TODO: replace with your LinkedIn -->
+              <div class="contact-pill">
+                <span>LinkedIn</span>
+                <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">
+                  linkedin.com/in/your-handle
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        © <span id="year"></span> Cameron Farrell. Built with GitHub Pages.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
