@@ -1,433 +1,370 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Cameron Farrell — Portfolio</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Portfolio of Cameron Farrell — Mechanical Engineering (Mechatronics).">
-  <style>
-    :root{
-      --bg:#f7f8fb;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --text:#0f172a;
-      --accent:#0ea5a3;
-      --accent-2:#06b6d4;
-      --glass: rgba(15,23,42,0.04);
-      --radius:12px;
-      --maxw:1100px;
-      --gap:18px;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:linear-gradient(180deg,#ffffff 0%,var(--bg) 80%);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:28px;
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-    }
+<meta charset="UTF-8">
+<title>Cameron Farrell | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --maxw:1150px;
+  --sidebarW:300px;
+  --font: 'Inter', Arial, sans-serif;
+}
 
-    /* layout */
-    .wrap{
-      width:100%;
-      max-width:var(--maxw);
-      display:grid;
-      grid-template-columns: 300px 1fr;
-      gap:var(--gap);
-      align-items:start;
-    }
+body{
+  margin:0;
+  font-family:var(--font);
+  background:#f7f9fc;
+  color:#0f172a;
+}
 
-    /* sidebar */
-    .sidebar{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:22px;
-      box-shadow:0 6px 18px rgba(16,24,40,0.06);
-      position:sticky;
-      top:28px;
-      height:fit-content;
-    }
-    .photo{
-      width:100%;
-      height:150px;
-      border-radius:10px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-weight:700;
-      font-size:22px;
-      letter-spacing:0.6px;
-      margin-bottom:14px;
-    }
-    .name{font-size:20px;font-weight:700;margin-bottom:4px}
-    .subtitle{font-size:13px;color:var(--muted);margin-bottom:12px}
-    .side-section{margin-top:12px}
-    .pill{display:inline-block;background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted);margin:4px 6px 4px 0}
-    .contact a{color:var(--text);text-decoration:none;font-weight:600}
-    .download{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:8px;background:var(--accent);color:white;text-decoration:none;font-weight:600}
+.wrap{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:var(--sidebarW) 1fr;
+  gap:28px;
+  padding:32px 18px;
+}
 
-    /* main column */
-    .main{display:flex;flex-direction:column;gap:var(--gap)}
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(16,24,40,0.04)}
-    h1,h2{margin:0 0 8px 0}
-    h1{font-size:20px}
-    h2{font-size:16px;color:var(--muted)}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:var(--glass);color:var(--muted)}
+.sidebar{
+  background:#fff;
+  padding:22px;
+  border-radius:12px;
+  border:1px solid rgba(15,23,42,0.08);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  position:sticky;
+  top:28px;
+  height:fit-content;
+}
 
-    /* projects grid */
-    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-    .project{
-      background:linear-gradient(180deg,#fff,#fbfdfe);
-      border-radius:10px;padding:12px;border:1px solid rgba(15,23,42,0.06);
-      cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:transform .12s ease,box-shadow .12s ease;
-    }
-    .project:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(16,24,40,0.08)}
-    .proj-thumb{height:140px;border-radius:8px;background-size:cover;background-position:center;border:1px solid rgba(15,23,42,0.04)}
-    .proj-title{font-weight:700}
-    .proj-meta{font-size:13px;color:var(--muted)}
+.pfp{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:#e2e8f0;
+  margin-bottom:12px;
+}
 
-    /* modal (light) */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,12,0.5);display:none;align-items:center;justify-content:center;z-index:60;padding:18px}
-    .modal{width:100%;max-width:920px;background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(15,23,42,0.06);box-shadow:0 30px 80px rgba(16,24,40,0.12);color:var(--text);position:relative}
-    .modal-grid{display:grid;grid-template-columns:1fr 320px;gap:14px}
-    .modal-close{position:absolute;right:18px;top:18px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
-    .modal-title{font-weight:800;margin-bottom:6px}
-    .modal-meta{color:var(--muted);font-size:13px;margin-bottom:12px}
-    .modal-desc{color:var(--muted);font-size:14px;line-height:1.4}
-    .thumb-row{display:flex;gap:8px;margin-top:12px}
-    .thumb-row img{width:72px;height:56px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent}
-    .thumb-row img.active{border-color:var(--accent)}
+h1,h2,h3{
+  margin:0;
+  font-weight:600;
+}
 
-    .carousel{height:340px;border-radius:8px;background:#fbfdfe;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;border:1px solid rgba(15,23,42,0.04)}
-    .carousel img{max-width:100%;max-height:100%;display:block}
-    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(15,23,42,0.06);border:0;color:var(--text);padding:8px;border-radius:8px;cursor:pointer}
-    .carousel-btn.left{left:12px}
-    .carousel-btn.right{right:12px}
+h1{ font-size:1.7rem; }
+h2{ font-size:1.35rem; margin-top:20px; }
 
-    .modal-side{background:linear-gradient(180deg,#fff,#fbfdfe);padding:12px;border-radius:8px;border:1px solid rgba(15,23,42,0.04)}
-    .modal-links a{display:inline-block;margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--accent);color:#012;text-decoration:none;font-weight:700}
-    .tags {margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
-    .tag {font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass);color:var(--muted)}
+.main{
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+}
 
-    /* responsive */
-    @media (max-width:900px){
-      .wrap{grid-template-columns:1fr; padding-bottom:40px}
-      .sidebar{position:relative;top:0}
-      .modal-grid{grid-template-columns:1fr}
-      .modal-side{order:2}
-    }
-  </style>
+.section{
+  background:#fff;
+  border-radius:12px;
+  padding:24px;
+  border:1px solid rgba(15,23,42,0.08);
+}
+
+ul{ padding-left:18px; margin:0; }
+li{ margin-bottom:6px; }
+
+/* ───────────────────────────────────────────
+   PROJECT GRID — FORCED 2×N LAYOUT
+──────────────────────────────────────────── */
+.projects{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:18px;
+}
+
+.project{
+  background: linear-gradient(180deg,#fff,#fbfdfe);
+  border:1px solid rgba(15,23,42,0.06);
+  border-radius:10px;
+  padding:16px;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.project:hover{
+  transform: translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.project h3{
+  font-size:1.1rem;
+  margin:0;
+}
+
+.proj-thumb{
+  height:220px;
+  border-radius:8px;
+  background-size:cover;
+  background-position:center;
+  border:1px solid rgba(15,23,42,0.04);
+}
+
+/* ───────────────────────────────────────────
+   MODAL
+──────────────────────────────────────────── */
+.modalBG{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.5);
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  z-index:2000;
+}
+
+.modal{
+  background:#fff;
+  width:100%;
+  max-width:1050px;
+  border-radius:12px;
+  padding:0;
+  overflow:hidden;
+}
+
+.modal-grid{
+  display:grid;
+  grid-template-columns: 450px 1fr;
+}
+
+.carousel{
+  height:420px;
+  background:#fbfdfe;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+  border-right:1px solid rgba(0,0,0,0.05);
+}
+
+.carousel img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.carousel button{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.15);
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.prevBtn{ left:10px; }
+.nextBtn{ right:10px; }
+
+.modal-side{
+  padding:24px;
+}
+
+.closeBtn{
+  background:#f1f5f9;
+  border:1px solid rgba(0,0,0,0.1);
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-bottom:16px;
+  float:right;
+}
+
+/* ───────────────────────────────────────────
+   RESPONSIVE
+──────────────────────────────────────────── */
+@media(max-width:900px){
+  .wrap{ grid-template-columns:1fr; padding-bottom:40px; }
+  .sidebar{ position:relative; top:0; }
+  .modal-grid{ grid-template-columns:1fr; }
+  .modal-side{ order:2; }
+
+  .projects{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .proj-thumb{ height:180px; }
+  .carousel{ height:300px; border-right:none; }
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <!-- SIDEBAR -->
-    <aside class="sidebar" aria-label="profile">
-      <div class="photo">CF</div>
-      <div class="name">Cameron Farrell</div>
-      <div class="subtitle">Mechanical Engineering — Mechatronics (UNB)</div>
 
-      <div class="side-section contact">
-        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Contact</div>
-        <div style="font-size:13px;margin-bottom:6px"><a href="mailto:youremail@example.com">youremail@example.com</a></div>
-        <div style="font-size:13px;margin-bottom:6px"><a href="https://github.com/your-username" target="_blank" rel="noreferrer">github.com/your-username</a></div>
-        <div style="font-size:13px"><a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">linkedin.com/in/your-handle</a></div>
-        <a class="download" href="#" target="_blank" rel="noreferrer">Resume (PDF)</a>
-      </div>
+<div class="wrap">
 
-      <div class="side-section">
-        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Quick facts</div>
-        <div class="pill">FSAE — Dynamics</div>
-        <div class="pill">MATLAB / Python</div>
-        <div class="pill">CAD & Manufacturing</div>
-      </div>
+  <!-- ───── SIDEBAR ───── -->
+  <div class="sidebar">
+    <h1>Cameron Farrell</h1>
+    <p>Mechatronics Engineering</p>
+    <div class="pfp"></div>
 
-      <div class="side-section">
-        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Interests</div>
-        <div style="font-size:13px;color:var(--muted)">Motorsport · Control systems · Robotics · Cycling</div>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-      <section class="card" aria-label="summary">
-        <h1>Overview</h1>
-        <h2>Mechanical Engineering student — practical modeler and maker</h2>
-        <p style="color:var(--muted);margin-top:10px">
-          I combine simulation-driven design with hands-on prototyping: MATLAB/Simulink modeling for vehicle dynamics, CAD for part design, and lab experience in manufacturing and testing. Looking for co-op / internship roles in automotive, robotics, or advanced manufacturing.
-        </p>
-        <div class="tags" style="margin-top:12px">
-          <div class="tag">Vehicle dynamics</div>
-          <div class="tag">Suspension analysis</div>
-          <div class="tag">Numerical methods</div>
-          <div class="tag">Prototyping</div>
-        </div>
-      </section>
-
-      <section class="card" id="projectsSection">
-        <h1>Projects</h1>
-        <h2>Click any project for photos, notes, and links</h2>
-        <div style="height:8px"></div>
-        <div class="projects" id="projectsGrid">
-          <!-- PROJECT CARDS: duplicate and edit as needed -->
-          <div class="project" data-id="p1" tabindex="0" role="button" aria-pressed="false">
-            <div class="proj-thumb" style="background-image:url('assets/p1-thumb.jpg')"></div>
-            <div class="proj-title">FSAE Wheel-load & Frequency Analysis</div>
-            <div class="proj-meta">MATLAB • Simulink • Suspension</div>
-          </div>
-
-          <div class="project" data-id="p2" tabindex="0" role="button" aria-pressed="false">
-            <div class="proj-thumb" style="background-image:url('assets/p2-thumb.jpg')"></div>
-            <div class="proj-title">Forging & Drawing Lab</div>
-            <div class="proj-meta">Material testing • Data analysis</div>
-          </div>
-
-          <div class="project" data-id="p3" tabindex="0" role="button" aria-pressed="false">
-            <div class="proj-thumb" style="background-image:url('assets/p3-thumb.jpg')"></div>
-            <div class="proj-title">Numerical Methods Library</div>
-            <div class="proj-meta">Python • Linear solvers</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" id="skills">
-        <h1>Skills</h1>
-        <h2>Technical categories</h2>
-        <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
-          <div class="tag">SolidWorks / Inventor</div>
-          <div class="tag">MATLAB / Simulink</div>
-          <div class="tag">Python (NumPy)</div>
-          <div class="tag">Machining • Fabrication</div>
-          <div class="tag">FEA basics</div>
-          <div class="tag">Lab instrumentation</div>
-          <div class="tag">Git / Version control</div>
-          <div class="tag">Technical writing</div>
-        </div>
-      </section>
-
-      <section class="card" id="experience">
-        <h1>Experience</h1>
-        <h2>Relevant roles</h2>
-        <div style="margin-top:12px">
-          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(15,23,42,0.04)">
-            <div style="max-width:68%"><div style="font-weight:700">Suspension / Dynamics Member</div><div style="font-size:13px;color:var(--muted)">UNB Formula SAE — 2024–Present</div></div>
-            <div style="font-size:12px;color:var(--muted);text-align:right">MATLAB • Vehicle dynamics</div>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(15,23,42,0.04)">
-            <div style="max-width:68%"><div style="font-weight:700">Mechanical Engineering Co-op</div><div style="font-size:13px;color:var(--muted)">BWS Manufacturing Ltd. — May–Sept 2024</div></div>
-            <div style="font-size:12px;color:var(--muted);text-align:right">CAD • Manufacturing</div>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:10px 0">
-            <div style="max-width:68%"><div style="font-weight:700">Sales & Service Technician</div><div style="font-size:13px;color:var(--muted)">Savage’s Bicycle Centre — 2025</div></div>
-            <div style="font-size:12px;color:var(--muted);text-align:right">Assembly • Customer service</div>
-          </div>
-        </div>
-      </section>
-    </main>
+    <h2>Contact</h2>
+    <p>Email: your.email@example.com</p>
+    <p>GitHub: github.com/camfarrell</p>
+    <p>LinkedIn: linkedin.com/in/yourprofile</p>
   </div>
 
-  <!-- MODAL BACKDROP -->
-  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-      <div class="modal-grid">
-        <div>
-          <div class="carousel" id="carousel">
-            <button class="carousel-btn left" id="prevBtn" aria-label="Previous image">‹</button>
-            <img id="carouselImg" src="" alt="Project image">
-            <button class="carousel-btn right" id="nextBtn" aria-label="Next image">›</button>
-          </div>
+  <!-- ───── MAIN CONTENT ───── -->
+  <div class="main">
 
-          <div class="thumb-row" id="thumbRow" aria-hidden="false"></div>
+    <!-- ABOUT -->
+    <div class="section">
+      <h2>About</h2>
+      <p>
+        Engineering student specializing in mechatronics, dynamic modeling, simulation, rapid prototyping,
+        and embedded systems. Strong background in MATLAB, Simulink, mechanical design, and integrated electromechanical systems.
+      </p>
+    </div>
 
-          <div style="margin-top:12px">
-            <div id="modalTitle" class="modal-title"></div>
-            <div id="modalMeta" class="modal-meta"></div>
-            <p id="modalDesc" class="modal-desc"></p>
-          </div>
+    <!-- PROJECTS -->
+    <div class="section">
+      <h2>Projects</h2>
+
+      <div class="projects">
+
+        <!-- PROJECT 1 -->
+        <div class="project" onclick="openModal(0)">
+          <div class="proj-thumb" style="background-image:url('project1a.jpg');"></div>
+          <h3>Wireless Rear Derailleur System</h3>
+          <p>End-to-end design of a fully wireless shifting system with custom motor driver, firmware, and mechanical actuation.</p>
         </div>
 
-        <aside class="modal-side">
-          <div style="font-weight:800" id="modalShort">Project highlights</div>
-          <div class="modal-links" id="modalLinks"></div>
+        <!-- PROJECT 2 -->
+        <div class="project" onclick="openModal(1)">
+          <div class="proj-thumb" style="background-image:url('project2a.jpg');"></div>
+          <h3>Dynamic Vehicle Modeling</h3>
+          <p>MATLAB + Simulink modeling of wheel load transfer, suspension frequencies, and system tuning for performance targets.</p>
+        </div>
 
-          <div style="margin-top:12px">
-            <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Tags</div>
-            <div id="modalTags" class="tags"></div>
-          </div>
-        </aside>
+        <!-- PROJECT 3 -->
+        <div class="project" onclick="openModal(2)">
+          <div class="proj-thumb" style="background-image:url('project3a.jpg');"></div>
+          <h3>Smart Bolt & Nut Sorting System</h3>
+          <p>High-speed sorting using mechatronic indexing and machine vision; modular conveyor architecture.</p>
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="project" onclick="openModal(3)">
+          <div class="proj-thumb" style="background-image:url('project4a.jpg');"></div>
+          <h3>Robotics & Embedded Controls</h3>
+          <p>Motion control testing, PID speed loops, and electromechanical system integration.</p>
+        </div>
+
       </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section">
+      <h2>Skills</h2>
+      <ul>
+        <li>CAD: SolidWorks, Fusion 360, Onshape</li>
+        <li>Programming: C/C++, Python, MATLAB, Embedded C</li>
+        <li>Simulation: MATLAB/Simulink, Multibody Dynamics</li>
+        <li>Prototyping: CNC, 3D printing, embedded hardware</li>
+        <li>Controls: Motor drivers, PID tuning, sensor integration</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ───────────── MODAL SYSTEM ───────────── -->
+<div class="modalBG" id="modalBG">
+
+  <div class="modal">
+    <div class="modal-grid">
+
+      <!-- LEFT: IMAGE CAROUSEL -->
+      <div class="carousel">
+        <button class="prevBtn" onclick="prevImage()">‹</button>
+        <img id="carouselImg" src="">
+        <button class="nextBtn" onclick="nextImage()">›</button>
+      </div>
+
+      <!-- RIGHT: DESCRIPTION -->
+      <div class="modal-side">
+        <button class="closeBtn" onclick="closeModal()">Close</button>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+      </div>
+
     </div>
   </div>
 
-  <script>
-    // Projects — edit titles, images, links, text.
-    const projects = {
-      p1: {
-        title: "FSAE Wheel-load & Frequency Analysis",
-        meta: "MATLAB • Simulink • Suspension tuning",
-        desc: "Built dynamic MATLAB and Simulink models to quantify wheel-load transfer during combined braking and cornering. Tuned ride and roll frequencies; results used to select springs and dampers and to guide geometry changes.",
-        short: "Wheel-load transfer modeling, parameter sweeps, suspension tuning.",
-        tags: ["Vehicle dynamics","Parameter sweeps","Suspension"],
-        links: [
-          {label:"View code (GitHub)", href:"https://github.com/your-username/fsae-wheel-load", blank:true},
-          {label:"Report (PDF)", href:"assets/p1-report.pdf", blank:false}
-        ],
-        images: [
-          "assets/p1-1.jpg",
-          "assets/p1-2.jpg",
-          "assets/p1-3.jpg"
-        ]
-      },
-      p2: {
-        title: "Forging & Drawing Lab",
-        meta: "Material testing • Load cell analysis",
-        desc: "Performed open-die forging and drawing experiments on 6061-T6 and cold-rolled steel; extracted flow stress, friction, and power requirements from load cell and geometry data.",
-        short: "Lab testing and material behavior analysis.",
-        tags: ["Forging","Materials","Testing"],
-        links: [
-          {label:"Lab report", href:"assets/p2-report.pdf", blank:false}
-        ],
-        images: [
-          "assets/p2-1.jpg",
-          "assets/p2-2.jpg"
-        ]
-      },
-      p3: {
-        title: "Numerical Methods Library",
-        meta: "Python • Linear solvers • Error analysis",
-        desc: "Implemented Jacobi and Gauss–Seidel iterative solvers, LU factorization, and Newton-based root finding. Benchmarked convergence and numerical stability on large matrices.",
-        short: "Iterative solvers, LU, convergence studies.",
-        tags: ["Python","Numerical methods","LU"],
-        links: [
-          {label:"Repo", href:"https://github.com/your-username/numerical-methods", blank:true}
-        ],
-        images: [
-          "assets/p3-1.png",
-          "assets/p3-2.png",
-          "assets/p3-3.png"
-        ]
-      }
-    };
+</div>
 
-    // DOM refs
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const modalClose = document.getElementById('modalClose');
-    const carouselImg = document.getElementById('carouselImg');
-    const thumbRow = document.getElementById('thumbRow');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalMeta = document.getElementById('modalMeta');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalShort = document.getElementById('modalShort');
-    const modalLinks = document.getElementById('modalLinks');
-    const modalTags = document.getElementById('modalTags');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+<script>
+/* PROJECT DATA */
+const projects = [
+  {
+    title: "Wireless Rear Derailleur System",
+    desc: "A fully wireless shifting system with custom firmware, BLDC actuation, 3D-printed gearbox, and motor control algorithms.",
+    images: ["project1a.jpg","project1b.jpg","project1c.jpg"]
+  },
+  {
+    title: "Dynamic Vehicle Modeling",
+    desc: "MATLAB + Simulink models for load transfer, suspension frequency tuning, and dynamics validation with experimental data.",
+    images: ["project2a.jpg","project2b.jpg"]
+  },
+  {
+    title: "Smart Bolt & Nut Sorting System",
+    desc: "High-speed sorting platform using machine vision, servo-indexing, and modular conveyor architecture.",
+    images: ["project3a.jpg","project3b.jpg","project3c.jpg"]
+  },
+  {
+    title: "Robotics & Embedded Controls",
+    desc: "Electromechanical actuation testing, PID speed loops, hardware integration, and robotics prototyping.",
+    images: ["project4a.jpg","project4b.jpg"]
+  }
+];
 
-    let activeProject = null;
-    let activeIndex = 0;
+let currentProject = 0;
+let currentImage = 0;
 
-    // Open modal
-    function openProject(id){
-      const p = projects[id];
-      if(!p) return;
-      activeProject = p;
-      activeIndex = 0;
-      modalTitle.textContent = p.title;
-      modalMeta.textContent = p.meta;
-      modalDesc.textContent = p.desc;
-      modalShort.textContent = p.short;
+function openModal(i){
+  currentProject = i;
+  currentImage = 0;
 
-      // images
-      carouselImg.src = p.images[0] || "";
-      thumbRow.innerHTML = "";
-      p.images.forEach((src, i) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = p.title + " image " + (i+1);
-        img.dataset.index = i;
-        if(i === 0) img.classList.add('active');
-        img.addEventListener('click', () => setCarouselIndex(i));
-        thumbRow.appendChild(img);
-      });
+  document.getElementById("modalBG").style.display="flex";
+  document.getElementById("modalTitle").innerText = projects[i].title;
+  document.getElementById("modalDesc").innerText  = projects[i].desc;
+  document.getElementById("carouselImg").src     = projects[i].images[0];
+}
 
-      // links
-      modalLinks.innerHTML = "";
-      p.links.forEach(l => {
-        const a = document.createElement('a');
-        a.href = l.href;
-        a.textContent = l.label;
-        if(l.blank) a.target = "_blank";
-        modalLinks.appendChild(a);
-      });
+function closeModal(){
+  document.getElementById("modalBG").style.display="none";
+}
 
-      // tags
-      modalTags.innerHTML = "";
-      p.tags.forEach(t => {
-        const s = document.createElement('div');
-        s.className = 'tag';
-        s.textContent = t;
-        modalTags.appendChild(s);
-      });
+function nextImage(){
+  currentImage = (currentImage + 1) % projects[currentProject].images.length;
+  document.getElementById("carouselImg").src = projects[currentProject].images[currentImage];
+}
 
-      modalBackdrop.style.display = 'flex';
-      modalBackdrop.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      modalClose.focus();
-    }
+function prevImage(){
+  currentImage = (currentImage - 1 + projects[currentProject].images.length) %
+                  projects[currentProject].images.length;
+  document.getElementById("carouselImg").src = projects[currentProject].images[currentImage];
+}
+</script>
 
-    function closeModal(){
-      modalBackdrop.style.display = 'none';
-      modalBackdrop.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-      activeProject = null;
-    }
-
-    function setCarouselIndex(i){
-      if(!activeProject) return;
-      const n = activeProject.images.length;
-      activeIndex = ((i % n) + n) % n;
-      carouselImg.src = activeProject.images[activeIndex];
-      Array.from(thumbRow.children).forEach((el, idx) => {
-        el.classList.toggle('active', idx === activeIndex);
-      });
-    }
-    function nextImage(){ setCarouselIndex(activeIndex + 1) }
-    function prevImage(){ setCarouselIndex(activeIndex - 1) }
-
-    // attach project click handlers
-    document.querySelectorAll('.project').forEach(card => {
-      const id = card.dataset.id;
-      card.addEventListener('click', () => openProject(id));
-      card.addEventListener('keypress', (e) => { if(e.key === 'Enter') openProject(id) });
-    });
-
-    // modal controls
-    modalClose.addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', (e) => { if(e.target === modalBackdrop) closeModal(); });
-    prevBtn.addEventListener('click', prevImage);
-    nextBtn.addEventListener('click', nextImage);
-    document.addEventListener('keydown', (e) => {
-      if(modalBackdrop.style.display === 'flex'){
-        if(e.key === 'Escape') closeModal();
-        if(e.key === 'ArrowLeft') prevImage();
-        if(e.key === 'ArrowRight') nextImage();
-      }
-    });
-
-    // optional: preload images
-    (function preloadAll(){
-      Object.values(projects).forEach(p => p.images.forEach(src => { const img = new Image(); img.src = src; }));
-    })();
-  </script>
 </body>
 </html>
+
 
