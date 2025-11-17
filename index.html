@@ -2,97 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Cameron Farrell — Portfolio (Interactive Projects)</title>
+  <title>Cameron Farrell — Portfolio</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Portfolio of Cameron Farrell — Mechanical Engineering (Mechatronics). Interactive project modals.">
+  <meta name="description" content="Portfolio of Cameron Farrell — Mechanical Engineering (Mechatronics).">
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --text:#e6eef6;
-      --accent:#7dd3fc;
-      --accent-2:#60a5fa;
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --text:#0f172a;
+      --accent:#0ea5a3;
+      --accent-2:#06b6d4;
+      --glass: rgba(15,23,42,0.04);
       --radius:12px;
       --maxw:1100px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --gap:18px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      background:linear-gradient(180deg,#071029 0%,#071018 60%);
+      background:linear-gradient(180deg,#ffffff 0%,var(--bg) 80%);
       color:var(--text);
       -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       padding:28px;
       display:flex;
       justify-content:center;
+      align-items:flex-start;
     }
-    .container{
+
+    /* layout */
+    .wrap{
       width:100%;
       max-width:var(--maxw);
-      display:flex;
-      gap:28px;
-    }
-
-    /* Left column (intro) */
-    .left {
-      width:320px;
-      min-width:260px;
-    }
-    .card {
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:18px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 10px 30px rgba(3,6,14,0.6);
-      margin-bottom:18px;
-    }
-    .monogram {
-      width:72px;height:72px;border-radius:14px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex;align-items:center;justify-content:center;font-weight:700;color:#022;
-      font-size:22px;margin-bottom:12px;
-    }
-    h1{font-size:20px;margin:0 0 6px 0}
-    p.lead{color:var(--muted);margin-top:8px;font-size:14px}
-
-    .meta {display:flex;flex-direction:column;gap:8px;margin-top:12px}
-    .meta a{color:var(--accent);text-decoration:none;font-size:14px}
-
-    /* Projects section */
-    .main {
-      flex:1;
-    }
-    .projects-grid {
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:14px;
+      grid-template-columns: 300px 1fr;
+      gap:var(--gap);
+      align-items:start;
     }
-    .project {
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-      cursor:pointer;display:flex;flex-direction:column;gap:8px;
-      transition:transform .12s ease, box-shadow .12s ease;
+
+    /* sidebar */
+    .sidebar{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:0 6px 18px rgba(16,24,40,0.06);
+      position:sticky;
+      top:28px;
+      height:fit-content;
     }
-    .project:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(2,6,18,0.6)}
-    .proj-thumb{height:140px;border-radius:8px;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,0.03)}
+    .photo{
+      width:100%;
+      height:150px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:700;
+      font-size:22px;
+      letter-spacing:0.6px;
+      margin-bottom:14px;
+    }
+    .name{font-size:20px;font-weight:700;margin-bottom:4px}
+    .subtitle{font-size:13px;color:var(--muted);margin-bottom:12px}
+    .side-section{margin-top:12px}
+    .pill{display:inline-block;background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted);margin:4px 6px 4px 0}
+    .contact a{color:var(--text);text-decoration:none;font-weight:600}
+    .download{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:8px;background:var(--accent);color:white;text-decoration:none;font-weight:600}
+
+    /* main column */
+    .main{display:flex;flex-direction:column;gap:var(--gap)}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+    h1,h2{margin:0 0 8px 0}
+    h1{font-size:20px}
+    h2{font-size:16px;color:var(--muted)}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:var(--glass);color:var(--muted)}
+
+    /* projects grid */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .project{
+      background:linear-gradient(180deg,#fff,#fbfdfe);
+      border-radius:10px;padding:12px;border:1px solid rgba(15,23,42,0.06);
+      cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:transform .12s ease,box-shadow .12s ease;
+    }
+    .project:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(16,24,40,0.08)}
+    .proj-thumb{height:140px;border-radius:8px;background-size:cover;background-position:center;border:1px solid rgba(15,23,42,0.04)}
     .proj-title{font-weight:700}
     .proj-meta{font-size:13px;color:var(--muted)}
 
-    /* Modal */
-    .modal-backdrop {
-      position:fixed;inset:0;background:rgba(2,6,12,0.6);display:none;align-items:center;justify-content:center;
-      z-index:60;padding:18px;
-    }
-    .modal {
-      width:100%;max-width:920px;background:linear-gradient(180deg,#07131f 0%,#04101b 100%);
-      border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04);
-      box-shadow:0 30px 80px rgba(2,6,12,0.8);
-      color:var(--text);
-    }
-    .modal-grid{display:grid;grid-template-columns:1fr 360px;gap:14px}
-    .modal-close{position:absolute;right:22px;top:22px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
+    /* modal (light) */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,12,0.5);display:none;align-items:center;justify-content:center;z-index:60;padding:18px}
+    .modal{width:100%;max-width:920px;background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(15,23,42,0.06);box-shadow:0 30px 80px rgba(16,24,40,0.12);color:var(--text);position:relative}
+    .modal-grid{display:grid;grid-template-columns:1fr 320px;gap:14px}
+    .modal-close{position:absolute;right:18px;top:18px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
     .modal-title{font-weight:800;margin-bottom:6px}
     .modal-meta{color:var(--muted);font-size:13px;margin-bottom:12px}
     .modal-desc{color:var(--muted);font-size:14px;line-height:1.4}
@@ -100,67 +107,77 @@
     .thumb-row img{width:72px;height:56px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent}
     .thumb-row img.active{border-color:var(--accent)}
 
-    .carousel {
-      height:340px;border-radius:8px;background:#05111a;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;
-      border:1px solid rgba(255,255,255,0.03)
-    }
+    .carousel{height:340px;border-radius:8px;background:#fbfdfe;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;border:1px solid rgba(15,23,42,0.04)}
     .carousel img{max-width:100%;max-height:100%;display:block}
-    .carousel-btn{
-      position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.25);border:0;color:var(--text);padding:8px;border-radius:8px;cursor:pointer;
-    }
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(15,23,42,0.06);border:0;color:var(--text);padding:8px;border-radius:8px;cursor:pointer}
     .carousel-btn.left{left:12px}
     .carousel-btn.right{right:12px}
 
-    .modal-side {background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); padding:12px;border-radius:8px}
-    .modal-links a{display:inline-block;margin-top:8px;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.03);color:var(--accent);text-decoration:none}
+    .modal-side{background:linear-gradient(180deg,#fff,#fbfdfe);padding:12px;border-radius:8px;border:1px solid rgba(15,23,42,0.04)}
+    .modal-links a{display:inline-block;margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--accent);color:#012;text-decoration:none;font-weight:700}
     .tags {margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
-    .tag {font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
+    .tag {font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass);color:var(--muted)}
 
-    /* Mobile */
-    @media (max-width:920px){
-      .container{flex-direction:column;padding:18px}
-      .left{width:100%}
+    /* responsive */
+    @media (max-width:900px){
+      .wrap{grid-template-columns:1fr; padding-bottom:40px}
+      .sidebar{position:relative;top:0}
       .modal-grid{grid-template-columns:1fr}
       .modal-side{order:2}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <aside class="left">
-      <div class="card">
-        <div class="monogram">CF</div>
-        <h1>Cameron Farrell</h1>
-        <p class="lead">Mechanical Engineering — Mechatronics (UNB). Simulation-driven design and hands-on prototyping.</p>
-        <div class="meta">
-          <div><strong>Available:</strong> Summer 2026</div>
-          <a href="mailto:youremail@example.com">youremail@example.com</a>
-          <a href="https://github.com/your-username" target="_blank" rel="noreferrer">github.com/your-username</a>
-          <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">linkedin.com/in/your-handle</a>
-          <a href="#" style="margin-top:8px;display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:8px 10px;border-radius:8px;color:#012;text-decoration:none;font-weight:700">Resume (PDF)</a>
-        </div>
+  <div class="wrap">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" aria-label="profile">
+      <div class="photo">CF</div>
+      <div class="name">Cameron Farrell</div>
+      <div class="subtitle">Mechanical Engineering — Mechatronics (UNB)</div>
+
+      <div class="side-section contact">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Contact</div>
+        <div style="font-size:13px;margin-bottom:6px"><a href="mailto:youremail@example.com">youremail@example.com</a></div>
+        <div style="font-size:13px;margin-bottom:6px"><a href="https://github.com/your-username" target="_blank" rel="noreferrer">github.com/your-username</a></div>
+        <div style="font-size:13px"><a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">linkedin.com/in/your-handle</a></div>
+        <a class="download" href="#" target="_blank" rel="noreferrer">Resume (PDF)</a>
       </div>
 
-      <div class="card">
-        <h2 style="margin:0 0 8px 0">Skills</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <div class="tag">MATLAB</div>
-          <div class="tag">Simulink</div>
-          <div class="tag">SolidWorks</div>
-          <div class="tag">Python</div>
-          <div class="tag">Machining</div>
-          <div class="tag">Lab instrumentation</div>
-        </div>
+      <div class="side-section">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Quick facts</div>
+        <div class="pill">FSAE — Dynamics</div>
+        <div class="pill">MATLAB / Python</div>
+        <div class="pill">CAD & Manufacturing</div>
+      </div>
+
+      <div class="side-section">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Interests</div>
+        <div style="font-size:13px;color:var(--muted)">Motorsport · Control systems · Robotics · Cycling</div>
       </div>
     </aside>
 
+    <!-- MAIN -->
     <main class="main">
-      <div class="card">
-        <h2 style="margin-bottom:6px">Projects</h2>
-        <p style="color:var(--muted);margin-top:0;margin-bottom:12px">Click any project to open detailed view with photos, notes, and links.</p>
+      <section class="card" aria-label="summary">
+        <h1>Overview</h1>
+        <h2>Mechanical Engineering student — practical modeler and maker</h2>
+        <p style="color:var(--muted);margin-top:10px">
+          I combine simulation-driven design with hands-on prototyping: MATLAB/Simulink modeling for vehicle dynamics, CAD for part design, and lab experience in manufacturing and testing. Looking for co-op / internship roles in automotive, robotics, or advanced manufacturing.
+        </p>
+        <div class="tags" style="margin-top:12px">
+          <div class="tag">Vehicle dynamics</div>
+          <div class="tag">Suspension analysis</div>
+          <div class="tag">Numerical methods</div>
+          <div class="tag">Prototyping</div>
+        </div>
+      </section>
 
-        <div class="projects-grid" id="projectsGrid">
-          <!-- Project cards (edit titles, thumbs, data-id) -->
+      <section class="card" id="projectsSection">
+        <h1>Projects</h1>
+        <h2>Click any project for photos, notes, and links</h2>
+        <div style="height:8px"></div>
+        <div class="projects" id="projectsGrid">
+          <!-- PROJECT CARDS: duplicate and edit as needed -->
           <div class="project" data-id="p1" tabindex="0" role="button" aria-pressed="false">
             <div class="proj-thumb" style="background-image:url('assets/p1-thumb.jpg')"></div>
             <div class="proj-title">FSAE Wheel-load & Frequency Analysis</div>
@@ -178,14 +195,46 @@
             <div class="proj-title">Numerical Methods Library</div>
             <div class="proj-meta">Python • Linear solvers</div>
           </div>
-
-          <!-- Add more project cards as needed -->
         </div>
-      </div>
+      </section>
+
+      <section class="card" id="skills">
+        <h1>Skills</h1>
+        <h2>Technical categories</h2>
+        <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
+          <div class="tag">SolidWorks / Inventor</div>
+          <div class="tag">MATLAB / Simulink</div>
+          <div class="tag">Python (NumPy)</div>
+          <div class="tag">Machining • Fabrication</div>
+          <div class="tag">FEA basics</div>
+          <div class="tag">Lab instrumentation</div>
+          <div class="tag">Git / Version control</div>
+          <div class="tag">Technical writing</div>
+        </div>
+      </section>
+
+      <section class="card" id="experience">
+        <h1>Experience</h1>
+        <h2>Relevant roles</h2>
+        <div style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(15,23,42,0.04)">
+            <div style="max-width:68%"><div style="font-weight:700">Suspension / Dynamics Member</div><div style="font-size:13px;color:var(--muted)">UNB Formula SAE — 2024–Present</div></div>
+            <div style="font-size:12px;color:var(--muted);text-align:right">MATLAB • Vehicle dynamics</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(15,23,42,0.04)">
+            <div style="max-width:68%"><div style="font-weight:700">Mechanical Engineering Co-op</div><div style="font-size:13px;color:var(--muted)">BWS Manufacturing Ltd. — May–Sept 2024</div></div>
+            <div style="font-size:12px;color:var(--muted);text-align:right">CAD • Manufacturing</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0">
+            <div style="max-width:68%"><div style="font-weight:700">Sales & Service Technician</div><div style="font-size:13px;color:var(--muted)">Savage’s Bicycle Centre — 2025</div></div>
+            <div style="font-size:12px;color:var(--muted);text-align:right">Assembly • Customer service</div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
-  <!-- Modal backdrop -->
+  <!-- MODAL BACKDROP -->
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
@@ -197,9 +246,7 @@
             <button class="carousel-btn right" id="nextBtn" aria-label="Next image">›</button>
           </div>
 
-          <div class="thumb-row" id="thumbRow" aria-hidden="false">
-            <!-- thumbnails injected here -->
-          </div>
+          <div class="thumb-row" id="thumbRow" aria-hidden="false"></div>
 
           <div style="margin-top:12px">
             <div id="modalTitle" class="modal-title"></div>
@@ -210,9 +257,7 @@
 
         <aside class="modal-side">
           <div style="font-weight:800" id="modalShort">Project highlights</div>
-          <div class="modal-links" id="modalLinks">
-            <!-- links injected -->
-          </div>
+          <div class="modal-links" id="modalLinks"></div>
 
           <div style="margin-top:12px">
             <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Tags</div>
@@ -224,7 +269,7 @@
   </div>
 
   <script>
-    // Project data: replace image paths and text with real content
+    // Projects — edit titles, images, links, text.
     const projects = {
       p1: {
         title: "FSAE Wheel-load & Frequency Analysis",
@@ -273,7 +318,7 @@
       }
     };
 
-    const projectsGrid = document.getElementById('projectsGrid');
+    // DOM refs
     const modalBackdrop = document.getElementById('modalBackdrop');
     const modalClose = document.getElementById('modalClose');
     const carouselImg = document.getElementById('carouselImg');
@@ -290,7 +335,7 @@
     let activeProject = null;
     let activeIndex = 0;
 
-    // open modal with project id
+    // Open modal
     function openProject(id){
       const p = projects[id];
       if(!p) return;
@@ -301,7 +346,7 @@
       modalDesc.textContent = p.desc;
       modalShort.textContent = p.short;
 
-      // load images into carousel and thumbs
+      // images
       carouselImg.src = p.images[0] || "";
       thumbRow.innerHTML = "";
       p.images.forEach((src, i) => {
@@ -310,9 +355,7 @@
         img.alt = p.title + " image " + (i+1);
         img.dataset.index = i;
         if(i === 0) img.classList.add('active');
-        img.addEventListener('click', () => {
-          setCarouselIndex(i);
-        });
+        img.addEventListener('click', () => setCarouselIndex(i));
         thumbRow.appendChild(img);
       });
 
@@ -338,7 +381,6 @@
       modalBackdrop.style.display = 'flex';
       modalBackdrop.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
-      // focus management
       modalClose.focus();
     }
 
@@ -354,20 +396,18 @@
       const n = activeProject.images.length;
       activeIndex = ((i % n) + n) % n;
       carouselImg.src = activeProject.images[activeIndex];
-      // update thumb active class
       Array.from(thumbRow.children).forEach((el, idx) => {
         el.classList.toggle('active', idx === activeIndex);
       });
     }
-
     function nextImage(){ setCarouselIndex(activeIndex + 1) }
     function prevImage(){ setCarouselIndex(activeIndex - 1) }
 
-    // attach click handlers to project cards
+    // attach project click handlers
     document.querySelectorAll('.project').forEach(card => {
       const id = card.dataset.id;
       card.addEventListener('click', () => openProject(id));
-      card.addEventListener('keypress', (e)=>{ if(e.key === 'Enter') openProject(id) });
+      card.addEventListener('keypress', (e) => { if(e.key === 'Enter') openProject(id) });
     });
 
     // modal controls
@@ -383,16 +423,10 @@
       }
     });
 
-    // preload images for smoother UI (optional)
-    function preloadAll(){
-      Object.values(projects).forEach(p => {
-        p.images.forEach(src => {
-          const img = new Image();
-          img.src = src;
-        });
-      });
-    }
-    preloadAll();
+    // optional: preload images
+    (function preloadAll(){
+      Object.values(projects).forEach(p => p.images.forEach(src => { const img = new Image(); img.src = src; }));
+    })();
   </script>
 </body>
 </html>
