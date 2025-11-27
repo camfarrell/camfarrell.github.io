@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cameron Farrell | Engineering Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #ffffff;
+            --bg-sidebar: #f8f9fa;
+            --text-main: #2c3e50;
+            --text-muted: #6c757d;
+            --accent-color: #0056b3;
+            --accent-hover: #004494;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background-color: var(--bg-sidebar);
+            padding: 4rem 2.5rem;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .identity-area h1 { font-size: 2.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; }
+        .identity-area h2 { font-size: 1rem; font-weight: 400; color: var(--text-muted); margin-bottom: 2.5rem; letter-spacing: 0.5px; }
+        .bio-text { font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 300px; }
+
+        .resume-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background-color: var(--accent-color); color: white; padding: 12px 24px;
+            text-decoration: none; font-weight: 700; border-radius: 4px;
+            transition: background-color 0.2s ease; box-shadow: var(--shadow); width: fit-content;
+        }
+        .resume-btn:hover { background-color: var(--accent-hover); }
+
+        .contact-area { margin-top: 3rem; }
+        .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-main); }
+        .contact-item i { color: var(--accent-color); width: 20px; text-align: center; }
+        .contact-item a { color: var(--text-main); text-decoration: none; transition: color 0.2s; }
+        .contact-item a:hover { color: var(--accent-color); text-decoration: underline; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content { flex: 1; padding: 4rem 5%; overflow-y: auto; }
+
+        .section-heading {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--text-muted); margin-bottom: 3rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-color); padding-bottom: 10px; display: inline-block;
+        }
+
+        .project-card { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 6rem; }
+        .project-text { flex: 0.8; } /* Give text slightly less width */
+        .project-header { margin-bottom: 1.5rem; }
+        .project-title { font-size: 1.75rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem; }
+        .project-company { font-size: 1rem; color: var(--accent-color); font-weight: 400; font-style: italic; }
+        .project-company a { color: inherit; text-decoration: none; }
+        .project-company a:hover { text-decoration: underline; opacity: 0.8; }
+        .project-description { line-height: 1.6; color: var(--text-main); margin-bottom: 1.5rem; }
+        .project-list { list-style: none; margin-bottom: 1.5rem; }
+        .project-list li { position: relative; padding-left: 1.2rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-muted); }
+        .project-list li::before { content: "•"; color: var(--accent-color); font-weight: bold; position: absolute; left: 0; }
+        
+        .tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+            background-color: #f1f5f9; color: var(--text-main); padding: 5px 12px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border-color);
+        }
+
+        /* --- SMART GALLERY LAYOUTS --- */
+        .project-gallery {
+            flex: 1.2;
+            display: grid;
+            gap: 10px;
+            height: 500px; /* Fixed height to keep layouts consistent */
+        }
+
+        .gallery-item {
+            width: 100%; height: 100%;
+            border-radius: 4px; overflow: hidden;
+            box-shadow: var(--shadow); border: 1px solid var(--border-color);
+            background-color: #ffffff; /* White bg for clean CAD look */
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover; 
+            display: block; transition: transform 0.3s ease; cursor: pointer;
+        }
+        .gallery-item:hover img { transform: scale(1.02); }
+
+        /* LAYOUT 1: STANDARD (1 Top Wide, 2 Bottom) - Best for Landscapes */
+        .layout-standard {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1.5fr 1fr; /* Top row taller */
+            grid-template-areas: 
+                "main main"
+                "sub1 sub2";
+        }
+
+        /* LAYOUT 2: VERTICAL SPLIT (1 Tall Left, 2 Right) - Best for Mixed Aspect Ratios */
+        .layout-vertical-split {
+            grid-template-columns: 1fr 1.5fr; /* Left col narrower for tall image */
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: 
+                "tall sub1"
+                "tall sub2";
+        }
+        
+        /* LAYOUT 3: 2x2 GRID (4 Images) - Modified for shorter bottom row */
+        .layout-2x2 {
+            grid-template-columns: 1fr 1.5fr; 
+            grid-template-rows: 1.5fr 1fr; /* Top row taller, bottom row shorter */
+            grid-template-areas: 
+                "nw ne"
+                "sw se";
+        }
+
+        /* Assigning Grid Areas */
+        .area-main { grid-area: main; }
+        .area-sub1 { grid-area: sub1; }
+        .area-sub2 { grid-area: sub2; }
+        .area-tall { grid-area: tall; }
+        
+        .area-nw { grid-area: nw; } /* North West */
+        .area-ne { grid-area: ne; } /* North East */
+        .area-sw { grid-area: sw; } /* South West */
+        .area-se { grid-area: se; } /* South East */
+
+        /* --- MODAL --- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto; 
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center; align-items: center; flex-direction: column;
+        }
+        .modal-content {
+            margin: auto; display: block; width: auto; max-width: 95%; max-height: 90vh;
+            border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation-name: zoom; animation-duration: 0.4s;
+        }
+        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+        .close {
+            position: absolute; top: 20px; right: 35px; color: #f1f1f1;
+            font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 2001;
+        }
+        .close:hover { color: #bbb; text-decoration: none; }
+        footer { margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 2rem; font-size: 0.8rem; color: var(--text-muted); }
+
+        @media (min-width: 1024px) {
+            body { flex-direction: row; }
+            .sidebar { width: 320px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+            .project-card { flex-direction: row; align-items: flex-start; }
+            .main-content { padding: 5rem 6rem; max-width: 1300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="top-content">
+            <div class="identity-area">
+                <h1>Cameron<br>Farrell</h1>
+                <h2>B.Sc. Mechanical Engineering, Mechatronics <br> University of New Brunswick</h2>
+            </div>
+            <p class="bio-text">
+                Adaptable and detail-oriented fourth-year mechatronics engineering student. Passionate about engineering design, analysis, and control systems.
+            </p>
+            <a href="Cameron_Farrell_Resume.pdf" target="_blank" class="resume-btn">
+                <i class="fas fa-download"></i> Resume
+            </a>
+        </div>
+        <div class="contact-area">
+            <div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:farrell.cameron@outlook.com">farrell.cameron@outlook.com</a></div>
+            <div class="contact-item"><i class="fas fa-phone"></i> <span>(506) 262-2750</span></div>
+            <div class="contact-item"><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/camfarrell" target="_blank">linkedin.com/in/camfarrell</a></div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <span class="section-heading">Selected Projects</span>
+
+        <!-- Project 1: Hopper -->
+        <article class="project-card">
+            <div class="project-text">
+                <div class="project-header">
+                    <h3 class="project-title">Abrasive Storage Hopper</h3>
+                    <span class="project-company"><a href="https://www.bwstrailers.com/" target="_blank">BWS Manufacturing Ltd.</a></span>
+                </div>
+                <p class="project-description">
+                    Used Autodesk Inventor to design an abrasive storage hopper for integration with existing blast equipment. The design emphasized cost-efficiency through standard stock profiles while ensuring efficient flow and easy maintenance.
+                </p>
+                <ul class="project-list">
+                    <li>CAD work included sheet metal plate sizing for manufacturability, wire mesh sizing and material selection.</li>
+                    <li>Designed HSS forklift interfaces for safe and efficient maintenance removal.</li>
+                    <li>Performed simple static load calculations to verify structural safety factors.</li>
+                </ul>
+                <div class="tags-container">
+                    <span class="tag">Autodesk Inventor</span>
+                    <span class="tag">Structural Analysis</span>
+                    <span class="tag">DFM</span>
+                </div>
+            </div>
+            
+            <!-- LAYOUT: 2x2 Grid (4 Images) -->
+            <div class="project-gallery layout-2x2">
+                <!-- Top Left: 3D Model -->
+                <div class="gallery-item area-nw">
+                    <img src="hopper_3dmodel.JPG" alt="3D Model Isometric View">
+                </div>
+                <!-- Top Right: Engineering Drawing -->
+                <div class="gallery-item area-ne">
+                    <img src="Hopper_drawing_snippet.jpg" alt="Engineering Detail Drawing">
+                </div>
+                <!-- Bottom Left: Production Photo -->
+                <div class="gallery-item area-sw">
+                    <img src="hopper_production_photo.jpg" alt="Hopper Production Photo">
+                </div>
+                <!-- Bottom Right: Post-Production Photo -->
+                <div class="gallery-item area-se">
+                    <img src="hopper_post_production.jpg" alt="Fabricated Frame Assembly">
+                </div>
+            </div>
+        </article>
+
+        <!-- Project 2: Formula SAE -->
+        <article class="project-card">
+            <div class="project-text">
+                <div class="project-header">
+                    <h3 class="project-title">Vehicle Dynamic Modelling</h3>
+                    <span class="project-company"><a href="https://linktr.ee/UNBRacing" target="_blank">UNB Formula SAE</a></span>
+                </div>
+                <p class="project-description">
+                    Developed a vehicle simulation using MATLAB to optimize suspension geometry. The model analyzed the vehicle's transient response to road inputs to inform spring and damper selection.
+                </p>
+                <ul class="project-list">
+                    <li>Built a Simulink model to simulate time-domain response to road inputs under different damper tunings.</li>
+                    <li>Wrote MATLAB scripts to compute wheel loads under combined lateral/longitudinal acceleration. The analysis included ride frequencies, roll gradient, and detailed load breakdowns to support an iterative selection of wheel bearings, springs, and motion ratios.</li>
+                    <li>Made a sketch to define coordinates and derive the coupled differential equations governing sprung and un-sprung base excitation response. 
+</li>
+                </ul>
+                <div class="tags-container">
+                    <span class="tag">MATLAB</span>
+                    <span class="tag">Simulink</span>
+                    <span class="tag">Vehicle Dynamics</span>
+                </div>
+            </div>
+
+            <!-- LAYOUT: Standard (1 Top, 2 Bottom) -->
+            <div class="project-gallery layout-standard">
+                <!-- Top Main: Simulink Block (Moved here as requested) -->
+                <div class="gallery-item area-main">
+                    <img src="block_diagram.png" alt="Simulink Model Logic">
+                </div>
+                <!-- Bottom Left: Car Diagram -->
+                <div class="gallery-item area-sub1">
+                    <img src="Full_car_diagram.png" alt="Suspension Free Body Diagram">
+                </div>
+                <!-- Bottom Right: Wheel Load Plots (Moved here) -->
+                <div class="gallery-item area-sub2">
+                    <img src="wheel_load_plots.png" alt="MATLAB Wheel Load Analysis">
+                </div>
+            </div>
+        </article>
+
+        <footer>
+            <p>&copy; 2025 Cameron Farrell</p>
+        </footer>
+    </main>
+
+    <!-- Modal Container -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        var modal = document.getElementById("imageModal");
+        var modalImg = document.getElementById("modalImg");
+        var images = document.querySelectorAll('.gallery-item img');
+        images.forEach(img => {
+            img.onclick = function(){
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            }
+        });
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() { modal.style.display = "none"; }
+        modal.onclick = function(event) {
+            if (event.target === modal) { modal.style.display = "none"; }
+        }
+    </script>
+</body>
+</html>
+
+
